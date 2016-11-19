@@ -31,7 +31,7 @@
 
 
         
-    <div class="book"  data-level="0" data-basepath="." data-revision="1479520316390">
+    <div class="book"  data-level="0" data-basepath="." data-revision="1479534273688">
     
 
 <div class="book-summary">
@@ -183,19 +183,20 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_250">
+                    <section class="normal" id="section-gitbook_809">
                     
-                        <h1 id="php">php基本语法形式</h1>
+                        <h2 id="php">php基本语法形式</h2>
 <h3 id="1php">1.php的标记符</h3>
 <blockquote>
 <p>有以下形式：</p>
 </blockquote>
 <ul>
 <li><p>形式1（推荐）：</p>
-<pre><code>&lt;?php
+<pre><code class="lang-PHP"><span class="hljs-preprocessor">&lt;?php</span>
 这里要写符合php语法的语句
-?&gt;
-</code></pre></li>
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+</li>
 <li><p>形式2：</p>
 <pre><code>&lt;script  language=”php”&gt;
 这里要写符合php语法的语句
@@ -207,14 +208,425 @@
 ?&gt;
 </code></pre><p>它依赖于php.ini中的一个设置项：<br>
 <img src="笔记2.fld/image008.png" alt=""></p>
+<p>  将其改为On，则上述形式就可以用了<br>
+<img src="笔记2.fld/image010.png" alt=""></p>
 </li>
 </ul>
-<p>将其改为On，则上述形式就可以用了<br>
-<img src="笔记2.fld/image010.png" alt=""></p>
 <blockquote>
 <p>php的结束标记（比如 ?&gt;  ），在如下情况可以省略：
 php的语句之后，再没有了html代码部分</p>
 </blockquote>
+<h3 id="2php">2.php的区分大小写特性</h3>
+<ul>
+<li><p>变量区分大小写；</p>
+</li>
+<li><p>常量通常默认也区分,如:$_POST[],$_GET[]，但可以人为设定为不区分（但这种做法不推荐）</p>
+</li>
+<li><p>其他场合的关键字都不区分，比如函数名，系统关键字（for，if，return....）</p>
+</li>
+</ul>
+<h3 id="3">3.一条语句使用一个分号结束</h3>
+<ul>
+<li><p>在一个php的语句标记中的最后一个分号可省略
+<img src="笔记2.fld/image012.png" alt=""></p>
+</li>
+<li><p>php结束标记省略则不能省略最后一个分号
+<img src="笔记2.fld/image014.png" alt=""></p>
+</li>
+</ul>
+<h3 id="4php">4.php的注释</h3>
+<ul>
+<li><p>单行注释：</p>
+<pre><code>  形式1： //注释内容
+  形式2： #注释内容
+</code></pre></li>
+<li><p>多行注释：</p>
+<pre><code>      /*  注释内容，可以多行 */
+</code></pre></li>
+<li><p>2个多行注释的技巧：<br>
+有时候，我们因为测试或别的原因，需要将一大段代码多次进行“注释”或“反注释”；，则此时，可以使用如下2个技巧来方便实现：<br></p>
+</li>
+</ul>
+<p>技巧1：<br>
+<img src="笔记2.fld/image016.png" alt=""></p>
+<p>反注释：<br>
+<img src="笔记2.fld/image018.png" alt=""></p>
+<p>技巧2：<br>
+<img src="笔记2.fld/image020.png" alt=""></p>
+<p>反注释：<br>
+<img src="笔记2.fld/image022.png" alt=""></p>
+<h2 id="">变量</h2>
+<h3 id="1">1.基本理解</h3>
+<p>变量可以理解为只是一个代表一定存储空间及其中的数据的一个“标识符”——也就是一个名字。
+引用关系/指代关系</p>
+<p>椭圆: 数据空间：
+$v1  =  1;        这一行代码，图示如下：</p>
+<p><img src="笔记2.fld/image024.png" alt=""></p>
+<p>这表明，<code>使用该变量，就是在使用该数据空间的数据值！</code>比如：</p>
+<pre><code class="lang-php"><span class="hljs-keyword">echo</span>  <span class="hljs-variable">$v1</span>;                    <span class="hljs-comment">///输出的是数据1</span>
+<span class="hljs-variable">$v2</span> = <span class="hljs-variable">$v1</span> + <span class="hljs-number">3</span>;               <span class="hljs-comment">//此时，其实进行的是1+3的计算！</span>
+</code></pre>
+<ul>
+<li><p>使用形式：<br>
+  每个变量名前面必须以$开头。</p>
+</li>
+<li><p>定义形式：<br>
+  php中，不支持“单纯定义”一个变量，而是，在第一次一个变量赋值的时候，就算是定义变量！</p>
+</li>
+</ul>
+<h3 id="2">2.变量的基本操作</h3>
+<p>只有4个操作：</p>
+<h4 id="">赋值：</h4>
+<p>等号（=）的左边放变量名，右边放“数据”，就是赋值；
+$v1 = 1;</p>
+<h4 id="">取值：</h4>
+<p>任何需要一个数据的语句中使用一个变量，此时就是指从该变量取得该变量的值——取值；<br>
+概括来说，大约有如下情形：</p>
+<pre><code class="lang-php"><span class="hljs-keyword">echo</span>  <span class="hljs-variable">$v1</span>;             <span class="hljs-comment">//取出v1的值并输出</span>
+<span class="hljs-variable">$v2</span>  =  <span class="hljs-variable">$v1</span>;           <span class="hljs-comment">//取出v1的值并给其他变量赋值；</span>
+<span class="hljs-variable">$v2</span>  =  <span class="hljs-variable">$v1</span> + <span class="hljs-number">3</span>;       <span class="hljs-comment">//取出v1的值并与3进行运算！</span>
+<span class="hljs-variable">$v2</span>  =   round( <span class="hljs-variable">$v1</span> ); <span class="hljs-comment">//取出v1的值并并使用函数round()对其进行四舍五入运算</span>
+</code></pre>
+<h4 id="isset">判断isset(变量名)：</h4>
+<p>作用：判断该变量是否存在，或该变量是否有数据值！存在或有数据值，就是true，否则就是false
+<img src="笔记2.fld/image026.png" alt=""></p>
+<h4 id="unset">删除unset(变量名)：</h4>
+<p>含义：删除一个变量，并不是指将该变量从程序中删掉，而是，“断开”该变量名跟该变量原有的数据值之间的“引用关系”（联系）！，此时，会有这样的结果：</p>
+<ul>
+<li><p>1，该变量名已经不指向（引用）任何数据了，则此时其isset()判断的结果就是false</p>
+</li>
+<li><p>2，该数据（可能）没有任何变量指向它了，就成为“无法使用的数据”——通常就被自动回收了
+<img src="笔记2.fld/image028.png" alt=""></p>
+<pre><code class="lang-php"><span class="hljs-variable">$v1</span> = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">unset</span>(<span class="hljs-variable">$v1</span>);
+<span class="hljs-variable">$s1</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$v1</span>);             <span class="hljs-comment">//false</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="3">3.变量命名规则</h3>
+<h4 id="">基本规则——保证程序的正确性</h4>
+<ul>
+<li>以字母或下划线开头</li>
+<li>后跟任意数量（含０个）的字母，数字和下划线</li>
+</ul>
+<h4 id="">行业规则——保证程序的可读性</h4>
+<p>有3种常见的命名法：</p>
+<ul>
+<li><p>1，骆驼命名法：首单词小写，其后每个单词首字母大写
+<br>举例：
+$name &nbsp;&nbsp;$myName&nbsp;&nbsp;$myFatherName</p>
+</li>
+<li><p>2，帕斯卡命名法：每个单词首字母大写
+<br>举例：$Name&nbsp;&nbsp;$MyName&nbsp;&nbsp;$MyFatherName</p>
+</li>
+<li><p>3，下划线分割法：每个单词小写，并且之间用下划线分开
+<br>举例：$name&nbsp;&nbsp;$my_name&nbsp;&nbsp;$my_father_name</p>
+</li>
+</ul>
+<h3 id="4">4.变量的传值方式</h3>
+<p>1，变量的传值方式，是指“一个变量，传给另一个变量”的内部细节形式——单对单；</p>
+<p>2，变量的传值方式，只有2中：值传递，引用传递；</p>
+<h4 id="">值传递</h4>
+<pre><code class="lang-php"><span class="hljs-variable">$v1</span> = <span class="hljs-number">1</span>;
+<span class="hljs-variable">$v2</span> = <span class="hljs-variable">$v1</span>; <span class="hljs-comment">//这就是值传递</span>
+</code></pre>
+<p>简单理解：将$v1的值取出来（注意：$v1中的值还在），然后再用该值给$v2赋值。
+椭圆: 数据空间：1
+引用关系/指代关系</p>
+<p>图示理解：
+<img src="笔记2.fld/image030.png" alt=""></p>
+<p>可见，值传递，就是变量v1的值进行了复制，然后在给另一个变量v2赋值。<br>
+注意：</p>
+<ul>
+<li>这两个变量此时是值相等的；</li>
+<li>这两个变量又是互相独立的——互不影响；
+即$v1 = 10;         则echo  $v2 ；//输出1</li>
+</ul>
+<h4 id="">引用传递</h4>
+<p><code>php中，只有一种语法形式可以实现变量的引用传值方式：&amp;符号。</code></p>
+<p>举例如下：</p>
+<pre><code class="lang-php"><span class="hljs-variable">$m1</span>  =  <span class="hljs-number">1</span>;
+<span class="hljs-variable">$m2</span>  =  &amp; <span class="hljs-variable">$m1</span>;                  <span class="hljs-comment">//引用传值方式</span>
+</code></pre>
+<p>简单理解：       将变量$m1跟其数据值之间的“引用关系”，复制一份，再给予变量$m2，即，此时，变量$m2也同样具有跟原来数据的一个“引用关系”（指向关系）；</p>
+<p>图示理解：
+<img src="笔记2.fld/image032.png" alt=""></p>
+<p>结果是：</p>
+<ul>
+<li>此时仍然有了2个变量，但只有一个数据值（数据空间），2个变量都共同指向该数据空间。</li>
+<li>对其中任何一个变量的操作，其实都是在操作数据值（空间）；</li>
+</ul>
+<p>代码对比演示：
+<img src="笔记2.fld/image034.png" alt=""></p>
+<h3 id="5">5.可变变量</h3>
+<pre><code class="lang-php"><span class="hljs-variable">$s1</span> = “abc”;    <span class="hljs-comment">//这是一个变量，里面存储的是字符串”abc”</span>
+<span class="hljs-variable">$abc</span>  =  <span class="hljs-number">10</span>;    <span class="hljs-comment">//</span>
+<span class="hljs-keyword">echo</span>   <span class="hljs-variable">$$s1</span>;    <span class="hljs-comment">//???，输出10</span>
+</code></pre>
+<p>理解：</p>
+<ul>
+<li>在php中，一个”$”后面，总是跟着一个变量名！</li>
+<li>这里，echo输出的这个变量(以第一个$为标识）的名字是：$s1, 即”abc”</li>
+<li>所以，这里输出的是 $abc,  即 10</li>
+<li>这种连续出现“$”的变量形式，就是所谓的“可变变量”；</li>
+</ul>
+<h3 id="6">6.预定义变量</h3>
+<p>所谓预定义变量，其实指，php这个语言工具中，预先就定义好的变量；<br>
+我们只是“拿来使用”。</p>
+<h4 id="">综述</h4>
+<ul>
+<li>主要有：$_GET, $_POST, $_REQUEST, $_SERVER, $GLOBALS，</li>
+<li>均是数组</li>
+<li>系统定义与维护——即我们不应该其给其赋值或销毁其值，只应该去“用其值”。</li>
+<li>具有超全局作用域——哪里都可以使用。</li>
+<li>不同情形下可能具有不同的值</li>
+</ul>
+<h3 id="7_post">7.$_POST变量</h3>
+<p>含义：<br>
+它代表用户通过表单以post方式（ method=”post” ）提交的时候所提交的所有数据——这个称为post数据。</p>
+<p>基本演示：<br>
+7form_post.html页面：</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!--
+以下表单的数据，点击提交后，会将所有表单数据提交给
+8post_data.php这个页面（文件），并在该文件中去处理
+其实就是指：程序进入该文件中运行。
+--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">form</span>  <span class="hljs-attribute">action</span>=<span class="hljs-value">"8post_data.php"</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"post"</span>&gt;</span>
+    数据1：<span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data1"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">br</span> /&gt;</span>
+    数据2：<span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data2"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">br</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"提交"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
+<p>8post_data.php页面及输出结果为：</p>
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">//先一个一个获取数据：</span>
+<span class="hljs-keyword">if</span>( !<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_POST</span>) ){
+    <span class="hljs-variable">$d1</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'data1'</span>];
+    <span class="hljs-variable">$d2</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'data2'</span>];
+    <span class="hljs-comment">//然后输出，看看：</span>
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"d1 = $d1, d2 = $d2"</span>;
+
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;hr /&gt;"</span>;
+    <span class="hljs-comment">//再来看看整个$_POST这个数组数据！</span>
+    print_r(<span class="hljs-variable">$_POST</span>);
+}
+<span class="hljs-keyword">else</span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"非法的页面访问"</span>;
+}
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+<ul>
+<li><p>isset(变量)：</p>
+<ul>
+<li>判断变量是否存在，或变量是否为空（null）；如果存在，就是true，否则就是false</li>
+</ul>
+</li>
+<li><p>empty(变量): 判断变量的“内容”是否为空的（不是null的空，而是没有内容）.</p>
+<ul>
+<li>基本上，是一些硬性规定，如下数据都是“空的”： 0, “”,  “0”,  false,  null</li>
+<li>array()空数组也是空<br></li>
+<li>如果一个变量内容是空的，empty()返回的结果是true，否则是false</li>
+</ul>
+</li>
+</ul>
+<p>小案例：php页面计算器：</p>
+<p>html</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!--当action为空字符串的时候，是提交到本页面！
+    表单中的所有数据，要想提交，都必须有name
+--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">form</span>  <span class="hljs-attribute">action</span>=<span class="hljs-value">""</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"post"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data1"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"&lt;?php echo $num1; ?&gt;"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"yunsuanfu"</span> &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"+"</span> <span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-variable">$fuhao</span>==<span class="hljs-string">"+"</span>){ <span class="hljs-keyword">echo</span>  <span class="hljs-string">'selected="selected"'</span>;} <span class="hljs-preprocessor">?&gt;</span></span> &gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"-"</span> <span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-variable">$fuhao</span>==<span class="hljs-string">"-"</span>){ <span class="hljs-keyword">echo</span>  <span class="hljs-string">'selected="selected"'</span>;} <span class="hljs-preprocessor">?&gt;</span></span> &gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"*"</span> <span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-variable">$fuhao</span>==<span class="hljs-string">"*"</span>){ <span class="hljs-keyword">echo</span>  <span class="hljs-string">'selected="selected"'</span>;} <span class="hljs-preprocessor">?&gt;</span></span> &gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"/"</span> <span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-variable">$fuhao</span>==<span class="hljs-string">"/"</span>){ <span class="hljs-keyword">echo</span>  <span class="hljs-string">'selected="selected"'</span>;} <span class="hljs-preprocessor">?&gt;</span></span> &gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data2"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"&lt;?php echo $num2; ?&gt;"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"="</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"result"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"&lt;?php echo $jieguo; ?&gt;"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">br</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"reset"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"重置"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
+<p>php</p>
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_POST</span>)){
+    <span class="hljs-variable">$num1</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'data1'</span>];
+    <span class="hljs-variable">$num2</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'data2'</span>];
+
+    <span class="hljs-variable">$fuhao</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'yunsuanfu'</span>];
+    <span class="hljs-comment">//echo "符号为：$fuhao";</span>
+
+    <span class="hljs-keyword">if</span>( <span class="hljs-variable">$fuhao</span> == <span class="hljs-string">'+'</span> ){
+        <span class="hljs-variable">$jieguo</span> = <span class="hljs-variable">$num1</span> + <span class="hljs-variable">$num2</span>;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( <span class="hljs-variable">$fuhao</span> == <span class="hljs-string">'-'</span> ){
+        <span class="hljs-variable">$jieguo</span> = <span class="hljs-variable">$num1</span> - <span class="hljs-variable">$num2</span>;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( <span class="hljs-variable">$fuhao</span> == <span class="hljs-string">'*'</span> ){
+        <span class="hljs-variable">$jieguo</span> = <span class="hljs-variable">$num1</span> * <span class="hljs-variable">$num2</span>;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( <span class="hljs-variable">$fuhao</span> == <span class="hljs-string">'/'</span> ){
+        <span class="hljs-variable">$jieguo</span> = <span class="hljs-variable">$num1</span> / <span class="hljs-variable">$num2</span>;
+    }
+}
+<span class="hljs-keyword">else</span>{
+    <span class="hljs-comment">//当第一次进来是（没有post数据），</span>
+    <span class="hljs-comment">//设定这4个变量，保证后面的变量使用不会出错</span>
+    <span class="hljs-variable">$jieguo</span> = <span class="hljs-string">""</span>;
+    <span class="hljs-variable">$num1</span> = <span class="hljs-string">""</span>;
+    <span class="hljs-variable">$num2</span> = <span class="hljs-string">""</span>;
+    <span class="hljs-variable">$fuhao</span> = <span class="hljs-string">""</span>;
+}
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+<h3 id="8_get">8.$_GET变量</h3>
+<ul>
+<li>含义：<ul>
+<li>它代表用户通过get方式（ 有5种get形式 ）提交的时候所提交的所有数据——这个称为get数据。</li>
+</ul>
+</li>
+</ul>
+<p>小提示：get，post没有翻译！</p>
+<blockquote>
+<p>提交get数据有5种形式：</p>
+<p>形式1：</p>
+</blockquote>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>  <span class="hljs-attribute">action</span>=<span class="hljs-value">"目标文件.php"</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"get"</span>&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data1"</span> /&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>  <span class="hljs-attribute">name</span>=<span class="hljs-value">"data2"</span> /&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"提交"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p>这种形式的get数据，跟post数据类似，数据内容由用户填写或选择而得到！</p>
+<p>形式2：</p>
+</blockquote>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span>   <span class="hljs-attribute">href</span>=<span class="hljs-value">”目标文件.php？data1=5&amp;data2=cctv&amp;age=18”</span>&gt;</span>链接文字<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>它只是一个链接而已，只是在链接文件名的后面加上“？”，然后一个一个“串接数据”；</li>
+<li>数据形式为：数据项名称=数据值， 相互之间用“&amp;”符号隔开</li>
+<li>这种形式的数据也同样是“点击链接”就提交的get数据，但用户只能选择点还是不点，而不能修改数据。</li>
+</ul>
+<blockquote>
+<p>形式3：</p>
+</blockquote>
+<pre><code class="lang-script">&lt;script&gt;
+           location.href = “目标文件.php？data1=5&amp;data2=cctv&amp;age=18”;
+&lt;/script&gt;
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>该语句可以看做是通过js技术实现的页面跳转功能，跟a标签的连接功能完全一样！</li>
+<li>其中该语句，通常都是放在一个函数中，然后因为某个事件发生而去调用该函数！</li>
+</ul>
+<blockquote>
+<p>形式4：</p>
+</blockquote>
+<pre><code class="lang-script">&lt;script&gt;
+           location.assign( “目标文件.php？data1=5&amp;data2=cctv&amp;age=18”);
+&lt;/script&gt;
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>该语句其实跟形式3完全一样功能，只是location这个对象实现页面跳转的另一个语法形式而已！</li>
+</ul>
+<blockquote>
+<p>形式5：php的跳转语法</p>
+</blockquote>
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">//语法形式： header(“location: 目标网页地址”);</span>
+
+header(“location: 目标文件.php？data1=<span class="hljs-number">5</span>&amp;data2=cctv&amp;age=<span class="hljs-number">18</span>”);
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>小结：</p>
+</blockquote>
+<p>上述多种get形式提交数据，都要理解为：<br>
+跳转到某个页面，并“同时”携带（提交）一定的get数据过去！</p>
+<p>不管哪种形式的get数据提交，接收get数据，都只有一种形式，跟post类似：</p>
+<pre><code class="lang-php"><span class="hljs-variable">$v1</span> = <span class="hljs-variable">$_GET</span>[‘数据项名称’];     <span class="hljs-comment">//取得一个get数据项的值；比如$_GET[‘data1’],  $_GET[“age”];</span>
+也可以“输出”所有get数据：
+print_r(<span class="hljs-variable">$_GET</span>);  或  var_dump(<span class="hljs-variable">$_GET</span>);
+</code></pre>
+<h3 id="9_request">9.$_REQUEST变量</h3>
+<blockquote>
+<p>含义：</p>
+</blockquote>
+<p>一句话，它是$_GET变量和$_POST变量数据的“合集”：即，它里面同时存储了这两种数据。
+<img src="笔记2.fld/image048.png" alt=""></p>
+<p>结果为：</p>
+<p><img src="笔记2.fld/image050.png" alt=""></p>
+<p>如果表单为get提交方式：</p>
+<p><img src="笔记2.fld/image052.png" alt=""></p>
+<p>结果为：</p>
+<p><img src="笔记2.fld/image054.png" alt=""></p>
+<p>怎么能同时具有get和post数据呢？<br>
+只有一个方式：</p>
+<pre><code class="lang-php">&lt;!--以下action中的？号后面的数据都会以get方式提交--&gt;
+&lt;form   action=”目标文件.php？data1=<span class="hljs-number">5</span>&amp;data2=cctv&amp;age=<span class="hljs-number">18</span>”   method=”post”&gt;
+&lt;!--以下表单项的数据都会以post方式提交--&gt;
+&lt;input type=”text”  name=”n1” /&gt;
+&lt;input type=”text”  name=”n1” /&gt;
+&lt;input  type=”submit”  value=”提交” /&gt;
+&lt;/form&gt;
+</code></pre>
+<p>request数据取值时，跟get数据和post也完全一样！<br>
+$_REQUEST[‘数据项名称’];<br>
+<img src="笔记2.fld/image060.png" alt=""></p>
+<p>当post数据和get数据的数据项名称相同时（其实我们反对这么做），默认是post数据覆盖了get数据。<br>
+不过这个状况同样可以在php.ini中设置：<br>
+默认时：<br>
+<img src="笔记2.fld/image062.png" alt="">
+<br>可修改为：<br>
+<img src="笔记2.fld/image064.png" alt=""></p>
+<h3 id="10_server">10.$_SERVER变量</h3>
+<ul>
+<li>含义：<ul>
+<li>它代表在一次浏览网页的过程中的浏览器端的一些信息或服务器端的一些信息。</li>
+<li>我们只是在程序中可以拿到这些信息，并用于编程所需！比如：取得用户的访问IP地址。</li>
+</ul>
+</li>
+<li>注意：<ul>
+<li>这种信息，随着不同的页面，和不同的服务器，以及不同的时刻，都可能不同！</li>
+</ul>
+</li>
+<li>要求：<ul>
+<li>大约有30个左右的信息，我们只要知道其中5个左右！主要有：</li>
+<li>$_SERVER[‘REMOTE_ADDR’]：获取访问者的ip地址</li>
+<li>$_SERVER[‘SERVER_ADDR’]：获取服务器所在的ip地址</li>
+<li>$_SERVER[‘SERVER_NAME’]：获取服务器的名字，其实就是站点设置中的servername</li>
+<li>$_SERVER[‘DOCUMENT_ROOT’]：获取站点的真实物理地址，其实就是站点设置中的documentroot</li>
+<li>$_SERVER[‘PHP_SELF’]：获取当前网页地址（不含域名部分）</li>
+<li>$_SERVER[‘SCRIPT_FILENAME’]：获取当前网页地址物理路径</li>
+<li>$_SERVER[‘QUERY_STRING’]获取当前网页地址中的所有get数据（就是？号后面部分），但只是一个整体的字符串而已。</li>
+</ul>
+</li>
+</ul>
+<p><img src="笔记2.fld/image066.png" alt=""></p>
+<h3 id="11globals">11.$GLOBALS变量</h3>
+<ul>
+<li>含义：<ul>
+<li>它也是一个“重复性数据”，它里面存储了我们自己定义的所有“全局变量”。</li>
+</ul>
+</li>
+</ul>
+<p>举例：</p>
+<pre><code class="lang-php"><span class="hljs-variable">$v1</span> = <span class="hljs-number">1</span>;      <span class="hljs-comment">//定义了一个全局变量，</span>
+<span class="hljs-comment">//此时，就有了这样一个数据：$GLOBALS[‘v1’]，其值就是1</span>
+
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$v1</span> ;  <span class="hljs-comment">//输出1</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$GLOBALS</span>[‘v1’]；  <span class="hljs-comment">//输出1</span>
+</code></pre>
+<p>这个变量，主要是用于在局部范围不可以使用全局变量的时候，又需要该全局变量的值，此时就可以用它来取得该全局变量的值。<br>
+<img src="笔记2.fld/image068.png" alt=""><img src="笔记2.fld/image070.png" alt=""><br>
+再定义一个新的变量：<br>
+<img src="笔记2.fld/image072.png" alt=""><img src="笔记2.fld/image074.png" alt=""></p>
 
                     
                     </section>
